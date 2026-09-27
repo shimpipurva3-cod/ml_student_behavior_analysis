@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            color: #212529;
+        }
+
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .card-custom {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .analytics-box {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .analytics-box h4 {
+            font-size: 15px;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .analytics-box .stat-value {
+            font-size: 30px;
+            font-weight: 700;
+            color: #0d6efd;
+            margin-bottom: 4px;
+        }
+
+        .analytics-box small {
+            color: #8c98a4;
+            font-size: 13px;
+        }
+
+        .table th {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Top Navigation / Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Student Dashboard</h2>
+            <a href="/" class="btn btn-outline-danger">Logout</a>
+        </div>
+
+        <!-- 1. Learning Analytics Cards -->
+        <div class="card-custom">
+            <h3 class="mb-3">📊 Learning Analytics</h3>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="analytics-box">
+                        <h4>Study Hours</h4>
+                        <div class="stat-value">{{ study_hours }}</div>
+                        <small>Hours</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-box">
+                        <h4>Learning Sessions</h4>
+                        <div class="stat-value">{{ learning_sessions }}</div>
+                        <small>Sessions</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="analytics-box">
+                        <h4>Performance</h4>
+                        <div class="stat-value">{{ performance }}%</div>
+                        <small>Overall Score</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Add Learning Data -->
+        <div class="card-custom">
+            <h3>📝 Add Daily Learning Data</h3>
+            <hr>
+            <p class="text-muted">
+                Enter your daily study details, sleep hours, and scores to keep your record current.
+            </p>
+            <a href="/learning_data" class="btn btn-primary">
+                📊 Enter Learning Data
+            </a>
+        </div>
+
+        <!-- 3. My Learning Data Table -->
+        <div class="card-custom">
+            <h3>📂 My Learning Data</h3>
+            <hr>
+            {% if learning_data %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Study Hours</th>
+                            <th>Sleep Hours</th>
+                            <th>Screen Time</th>
+                            <th>Water Intake</th>
+                            <th>Marks</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in learning_data %}
+                        <tr>
+                            <td>{{ data.study_hours }}</td>
+                            <td>{{ data.sleep_hours }}</td>
+                            <td>{{ data.screen_time }}</td>
+                            <td>{{ data.water_intake }}</td>
+                            <td>{{ data.marks }}</td>
+                            <td>{{ data.created_at }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted mb-0">
+                No learning data available yet.
+            </p>
+            {% endif %}
+        </div>
+
+        <!-- 4. AI Learning Analysis -->
+        <div class="card-custom">
+            <h3>Learning Analysis</h3>
+            <hr>
+            <p class="text-muted">
+                Analyze your study habits and academic performance using our AI-based system.
+            </p>
+            <a href="/analyze" class="btn btn-primary">
+                🤖 Analyze My Learning Behavior
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Details</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #1677ff;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .info div {
+            padding: 15px;
+            background: #f7f8fa;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #1677ff;
+            color: white;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #1677ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="header">
+
+    <h1>👨‍🎓 Student Details</h1>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- Student Information -->
+
+    <div class="card">
+
+        <h2>👤 Student Information</h2>
+
+        <div class="info">
+
+            <div>
+                <strong>ID</strong><br>
+                {{ student.id }}
+            </div>
+
+            <div>
+                <strong>Name</strong><br>
+                {{ student.full_name }}
+            </div>
+
+            <div>
+                <strong>Email</strong><br>
+                {{ student.email }}
+            </div>
+
+            <div>
+                <strong>Department</strong><br>
+                {{ student.department }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Learning Data -->
+
+    <div class="card">
+
+        <h2>📚 Learning Data</h2>
+
+        {% if learning_data %}
+
+        <table>
+
+            <tr>
+
+                <th>Study Hours</th>
+                <th>Sleep Hours</th>
+                <th>Screen Time</th>
+                <th>Water Intake</th>
+                <th>Marks</th>
+
+            </tr>
+
+
+            {% for data in learning_data %}
+
+            <tr>
+
+                <td>{{ data.study_hours }}</td>
+
+                <td>{{ data.sleep_hours }}</td>
+
+                <td>{{ data.screen_time }}</td>
+
+                <td>{{ data.water_intake }}</td>
+
+                <td>{{ data.marks }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p>No learning data available for this student.</p>
+
+        {% endif %}
+    <a
+        href="{{ url_for('admin_dashboard') }}"
+        class="back-btn"
+    >
+        ⬅️ Back to Admin Dashboard
+    </a>
+
+
+</div>
+
+</body>
+
+</html>
